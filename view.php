@@ -12,7 +12,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
      </head>
 <body class="bg-gray-100">
      <div class="">
-     <div class="mt-5">
+     <div class="mt-5 px-5">
        <ul class="flex">
            <li class="flex-1 ml-8">
             <!-- <a href="#" class="ml-10 h-12"><img src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" class="h-12" alt="#homelogo"></a> -->
@@ -20,21 +20,24 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
            </li>
 
            <li class="flex-3 mr-6 py-3 hidden md:flex">
-            <a href="#" class="px-5 py-10 md:py-0">Home</a>
+            <!-- <a href="#" class="px-5 py-10 md:py-0">Home</a> -->
             <?php if ($_SESSION['role'] === 'admin'){ ?>
-                <a href="add.php">Add Hero</a></p>
+               <div class="">
+                 <a href="add.php" class="bg-green-400 px-3 py-2 text-white rounded-lg shadow-lg">Add Hero</a></p>
+               </div>
+                
                <?php } ?>
         </li>
 
-        <li class="flex-3 hidden md:flex py-3">
-            <a href="logout.php" class="order-last mr-8">Logout</a></p>
+        <li class="flex-3 hidden md:flex py-1">
+            <a href="logout.php" class="order-last mr-8 bg-indigo-400 px-3 mb-2 py-2 text-white rounded-lg shadow-lg">Logout</a></p>
            
         </li>
        </ul>
    </div>
           
      <!-- <h2>View Records</h2> -->
-     <h2 class="mt-3 ml-8 mr-4 italic">
+     <h2 class="mt-3 ml-8 mr-4 italic px-5">
           These are the names of the heroes who had the honour of working with Proffessor Xavier
      </h2>
      <?php
@@ -44,10 +47,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
      $sel_query="Select * from heroes;";
      $result = mysqli_query($conn,$sel_query);
      while($row = mysqli_fetch_assoc($result)) { ?>
-     <div class="mt-6 ml-8">
+     <div class="mt-6 ml-8 px-5 py-5 mr-5">
           
-         <div class="text-lg mr-4 ">
-              <div class="text-xl text-green-500 font-bold mt-15">
+         <div class="mr-4 ">
+              <div class="text-2xl text-green-500 font-bold mt-15">
                    <p class="mt-5">
                    <?php echo $row["hero_name"]; ?> 
                    </p>
@@ -58,10 +61,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
               <?php echo $row["real_name"]; ?> 
               </p>
 
-              <p class="mt-2">
+              <p class="mt-0 italic">
               <?php echo $row["short_bio"]; ?> 
               </p>
-               <p class="mt-4">
+               <p class="mt-4 text-lg">
                <?php echo $row["long_bio"]; ?> 
                </p>
           
@@ -70,7 +73,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
      </div>
      <?php if ($_SESSION['role'] === 'admin'){ ?>
           <div class="flex justify-start">
-          <div class="mt-5 ml-8">
+          <div class="mt-5 ml-8 px-5">
      <a href="update.php?id=<?php echo $row["id"]; ?>" class="bg-indigo-500 px-3 py-2 text-white rounded-lg shadow-lg">Update</a>
      
      </div>
@@ -81,12 +84,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
           </div>
     
      
-     </td>
+  
      <?php } ?>
-     </tr>
+    
      <?php $count++; } ?>
-     </tbody>
-     </table>
+
      </div>
 </body>
 </html>
