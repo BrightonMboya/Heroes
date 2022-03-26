@@ -15,7 +15,7 @@ $update = true;
 		$update = true;
 		$record = mysqli_query($conn, "SELECT * FROM heroes WHERE id=$id");
 
-		if (count($record) == 1) {
+		if (count($record) == 1 ) {
 			$n = mysqli_fetch_array($record);
       // $id = $n['id'];
 			$name = $n['hero_name'];
@@ -45,40 +45,36 @@ $update = true;
       
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div class="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
-            <form class="mb-0 space-y-6" action="" method="post">                
-              <div>
-                <label class="block text-sm font-medium text-gray-700">Hero Name</label>
-                <div class="mt-1">
-                  <input type="text" name="hero_name" value="<?php echo $row['hero_name'];?>" class="border border-gray-300 rounded-lg shadow-sm w-full py-1" />
-                </div>
-              </div>
-      
-              <div>
-                <label class="block text-sm font-medium text-gray-700">Real Name</label>
-                <div class="mt-1">
-                  <input  type="text" name="real_name" value="<?php echo $row['real_name'];?>" class="border border-gray-300 rounded-lg shadow-sm w-full py-1" />
-                </div>
-              </div>
+<form class="mb-0 space-y-6"method="post" action="" >
 
-              <div>
-                <label class="block text-sm font-medium text-gray-700">Short Bio</label>
-                <div class="mt-1">
-                  <input type="text" name="short_bio" value="<?php echo $row['short_bio'];?>" class="border border-gray-300 rounded-lg shadow-sm w-full py-1" />
-                </div>
-              </div>
+<input type="hidden" name="id" value="<?php echo $row['id']; ?>">
 
-              <div>
-                <label class="block text-sm font-medium text-gray-700">Long Bio</label>
-                <div class="mt-1">
-                  <input type="text" name="long_bio" value="<?php echo $row['long_bio'];?>" class="border border-gray-300 rounded-lg shadow-sm w-full py-6" />
-                </div>
-              </div>
-      
-              <div>
-                <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none 
-                focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" name="update">Update</button>
-              </div>
-              <?php
+<div class="input-group">
+  <label>Hero Name</label>
+  <input type="text" name="hero_name" value="<?php echo $row['hero_name'];?>" class="border border-gray-300 rounded-lg shadow-sm w-full py-1">
+</div>
+<div class="input-group">
+  <label>Real Name</label>
+  <input type="text" name="real_name" value="<?php echo $row['real_name'];?>" class="border border-gray-300 rounded-lg shadow-sm w-full py-1">
+</div>
+<div class="input-group">
+  <label>Short bio</label>
+  <input type="text" name="short_bio" value="<?php echo $row['short_bio'];?>" class="border border-gray-300 rounded-lg shadow-sm w-full py-1">
+</div>
+<div class="input-group">
+  <label>Long bio</label>
+  <input type="text" name="long_bio" value="<?php echo $row['long_bio'];?>" class="border border-gray-300 rounded-lg shadow-sm w-full py-1">
+</div>
+<div class="input-group">
+<?php if ($update == true): ?>
+<button type="submit" name="update" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none 
+                focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">update</button>
+<?php else: ?>
+<button class="btn" type="submit" name="save" >Save</button>
+<?php endif ?>
+
+</div>
+<?php
 
 if (isset($_POST['update'])) {
 	$id = $_POST['id'];
@@ -92,11 +88,6 @@ if (isset($_POST['update'])) {
 	header('location: view.php');
 }
 ?>
-            </form>
-          </div>
-        </div>
-      </div>
-
-
+</form>
 </body>
 </html>
